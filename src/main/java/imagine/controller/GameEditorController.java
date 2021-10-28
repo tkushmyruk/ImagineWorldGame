@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import imagine.model.DamageType;
 import imagine.model.ItemRarity;
 import imagine.model.ItemType;
+import imagine.model.MonsterType;
 import imagine.model.SkillType;
 import imagine.service.HeroService;
 import imagine.service.ItemService;
+import imagine.service.MonsterService;
 import imagine.service.SkillService;
 import imagine.util.Constants;
 import lombok.AllArgsConstructor;
@@ -23,6 +25,7 @@ public class GameEditorController {
     private final HeroService heroService;
     private final SkillService skillService;
     private final ItemService itemService;
+    private final MonsterService monsterService;
 
     @GetMapping("/editor")
     public String getListOfOptions(Model model) {
@@ -50,6 +53,13 @@ public class GameEditorController {
         model.addAttribute("itemTypes", ItemType.values());
         model.addAttribute("itemRarities", ItemRarity.values());
         return "itemEditorPage";
+    }
+
+    @GetMapping("/editor/monster")
+    public String getMonsterEditorPage(Model model){
+        model.addAttribute("monsters", monsterService.findAllMonsters());
+        model.addAttribute("monsterTypes", MonsterType.values());
+        return "monsterEditorPage";
     }
 
     @PostMapping("/editor/hero")
@@ -116,5 +126,22 @@ public class GameEditorController {
         return "itemEditorPage";
     }
 
+    @PostMapping("/editor/monster")
+    public String createMonster(@RequestParam String monsterName,
+        @RequestParam String description,
+        @RequestParam int lvl,
+        @RequestParam int damage,
+        @RequestParam int defense,
+        @RequestParam int healthPoints,
+        @RequestParam int manaPoints,
+        @RequestParam int experience,
+        @RequestParam String monsterType,
+        Model model){
+        monsterService.createMonster(monsterName, description, lvl, damage, defense, healthPoints,
+            manaPoints, experience, monsterType);
+        model.addAttribute("monsters", monsterService.findAllMonsters());
+        model.addAttribute("monsterTypes", MonsterType.values());
+        return "monsterEditorPage";
+    }
 
 }

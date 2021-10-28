@@ -20,6 +20,9 @@ public class Bag {
     @OneToOne
     @JoinColumn(name = "hero_id")
     private Hero hero;
+    @OneToOne
+    @JoinColumn(name = "monster_id")
+    private Monster monster;
     @OneToMany(mappedBy = "bag")
     private List<Item> items;
 

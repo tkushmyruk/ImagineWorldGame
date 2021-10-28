@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="item: ${items}">
+  <div>
+    <a href="/editor/edit/${item.itemName}" th:text="@{{item} edit (item = ${item.itemName})}"></a>
+  </div>
+</div>
+<form method="post">
+  <div>
+    <label>Item name : <input type="text" name="itemName"></label>
+  </div>
+  <div>
+    <label>Description : <input type="text" name="description"></label>
+  </div>
+  <div>
+    <label>Lvl : <input type="number" name="lvl"></label>
+  </div>
+  <div>
+    <label>Minimum Hero Lvl : <input type="number" name="minHeroLvl"></label>
+  </div>
+  <div>
+    <label>Damage : <input type="number" name="damage"></label>
+  </div>
+  <div>
+    <label>Defense : <input type="number" name="defense"></label>
+  </div>
+  <div>
+    <label>Health Points : <input type="number" name="healthPoints"></label>
+  </div>
+  <div>
+    <label>Mana Points : <input type="number" name="manaPoints"></label>
+  </div>
+  <div>
+    <label>Strength : <input type="number" name="strength"></label>
+  </div>
+  <div>
+    <label>Agility : <input type="number" name="agility"></label>
+  </div>
+  <div>
+    <label>Intelligence : <input type="number" name="intelligence"></label>
+  </div>
+  <div>
+    <label>Required Strength : <input type="number" name="requiredStrength"></label>
+  </div>
+  <div>
+    <label>Required Agility : <input type="number" name="requiredAgility"></label>
+  </div>
+  <div>
+    <label>Required Strength : <input type="number" name="requiredIntelligence"></label>
+  </div>
+  <select name="itemType">
+    <div th:each="itemType: ${itemTypes}">
+      <option  th:value="${itemType}" th:text="${itemType}"></option>
+    </div>
+  </select>
+  <select  name="itemRarity">
+    <div th:each="itemRarity : ${itemRarities}">
+      <option th:value="${itemRarity}" th:text="${itemRarity}"></option>
+    </div>
+  </select>
+  <div>
+    <button type="submit">Create</button>
+  </div>
+</form>
+</body>
+</html>

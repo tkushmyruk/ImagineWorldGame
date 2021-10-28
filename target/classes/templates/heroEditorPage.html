@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+ <div th:each="hero : ${heroes}">
+   <div>
+     <a href="/editor/edit/${hero.heroName}" th:text="@{{hero} edit (hero = ${hero.heroName})}"></a>
+   </div>
+ </div>
+<form method="post">
+<div>
+  <label>Hero Name : <input type="text" name="heroName"></label>
+</div>
+<div>
+  <label>Description : <input type="text" name="description"></label>
+</div>
+<div>
+  <label>Health Points : <input type="number" name="healthPoints"></label>
+</div>
+<div>
+  <label>Mana Points : <input type="number" name="manaPoints"></label>
+</div>
+<div>
+  <label>Strength : <input type="number" name="strength"></label>
+</div>
+<div>
+  <label>Agility : <input type="number" name="agility"></label>
+</div>
+<div>
+  <label>Intelligence : <input type="number" name="intelligence"></label>
+</div>
+<div>
+  <label>Defense : <input type="number" name="defense"></label>
+</div>
+<div>
+  <label>Attack : <input type="number" name="attack"></label>
+</div>
+<div>
+  <label>Free Stat Points : <input type="number" name="freeStatPoints"></label>
+</div>
+  <button type="submit">Create</button>
+</form>
+</body>
+</html>

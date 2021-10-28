@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="option : ${options}">
+  <a th:href="@{/editor/{option}(option=${option})}" th:text="@{{option} page (option=${option})}"></a>
+</div>
+</body>
+</html>

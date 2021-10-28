@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="skill: ${skills}">
+  <div>
+    <a href="/editor/edit/${skill.skillName}" th:text="@{{skill} edit (skill = ${skill.skillName})}"></a>
+  </div>
+</div>
+<form method="post">
+  <div>
+    <label>Skill Name : <input type="text" name="skillName"></label>
+  </div>
+  <div>
+    <label>Description : <input type="text" name="description"></label>
+  </div>
+  <div>
+    <label>Damage : <input type="number" name="damage"></label>
+  </div>
+  <div>
+    <label>Mana Cost : <input type="number" name="manaCost"></label>
+  </div>
+  <div>
+    <label>Periodic count : <input type="number" name="periodicCount"></label>
+  </div>
+  <div>
+    <label>Periodic damage : <input type="number" name="periodicDamage"></label>
+  </div>
+  <div>
+    <label>lvl : <input type="number" name="lvl"></label>
+  </div>
+  <div>
+    <label>Minimum Hero lvl : <input type="number" name="minHeroLvl"></label>
+  </div>
+  <select name="skillType">
+    <div th:each="skillType: ${skillTypes}">
+      <option  th:value="${skillType}" th:text="${skillType}"></option>
+    </div>
+  </select>
+  <select  name="damageType">
+    <div th:each="damageType: ${damageTypes}">
+      <option th:value="${damageType}" th:text="${damageType}"></option>
+    </div>
+  </select>
+  <div>
+  <button type="submit">Create</button>
+  </div>
+</form>
+</body>
+</html>

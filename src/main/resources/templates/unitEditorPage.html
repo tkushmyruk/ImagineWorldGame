@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="unit: ${units}">
+  <div>
+    <a href="/editor/edit/${unit.name}" th:text="@{{unit} edit (unit = ${unit.name})}"></a>
+  </div>
+</div>
+<form method="post">
+  <div>
+    <label>Unit Name : <input type="text" name="name"></label>
+  </div>
+  <div>
+    <label>Description : <input type="text" name="description"></label>
+  </div>
+  <button type="submit">Create</button>
+</form>
+</body>
+</html>

@@ -13,6 +13,7 @@ import imagine.model.SkillType;
 import imagine.service.HeroService;
 import imagine.service.ItemService;
 import imagine.service.SkillService;
+import imagine.service.UnitService;
 import imagine.util.Constants;
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,7 @@ public class GameEditorController {
     private final HeroService heroService;
     private final SkillService skillService;
     private final ItemService itemService;
+    private final UnitService unitService;
 
     @GetMapping("/editor")
     public String getListOfOptions(Model model) {
@@ -50,6 +52,12 @@ public class GameEditorController {
         model.addAttribute("itemTypes", ItemType.values());
         model.addAttribute("itemRarities", ItemRarity.values());
         return "itemEditorPage";
+    }
+
+    @GetMapping("/editor/unit")
+    public String getUnitEditorPage(Model model) {
+        model.addAttribute("units", unitService.findAllUnits());
+        return "unitEditorPage";
     }
 
     @PostMapping("/editor/hero")
@@ -114,6 +122,15 @@ public class GameEditorController {
         model.addAttribute("itemTypes", ItemType.values());
         model.addAttribute("itemRarities", ItemRarity.values());
         return "itemEditorPage";
+    }
+
+    @PostMapping("/editor/unit")
+    public String createUnit(@RequestParam String name,
+        @RequestParam String description,
+        Model model) {
+        unitService.createUnit(name, description);
+        model.addAttribute("units", unitService.findAllUnits());
+        return "unitEditorPage";
     }
 
 

@@ -15,6 +15,7 @@ import imagine.service.HeroService;
 import imagine.service.ItemService;
 import imagine.service.MonsterService;
 import imagine.service.SkillService;
+import imagine.service.UnitService;
 import imagine.util.Constants;
 import lombok.AllArgsConstructor;
 
@@ -25,6 +26,7 @@ public class GameEditorController {
     private final HeroService heroService;
     private final SkillService skillService;
     private final ItemService itemService;
+    private final UnitService unitService;
     private final MonsterService monsterService;
 
     @GetMapping("/editor")
@@ -55,6 +57,11 @@ public class GameEditorController {
         return "itemEditorPage";
     }
 
+    @GetMapping("/editor/unit")
+    public String getUnitEditorPage(Model model) {
+        model.addAttribute("units", unitService.findAllUnits());
+        return "unitEditorPage";
+      
     @GetMapping("/editor/monster")
     public String getMonsterEditorPage(Model model){
         model.addAttribute("monsters", monsterService.findAllMonsters());
@@ -126,6 +133,16 @@ public class GameEditorController {
         return "itemEditorPage";
     }
 
+    @PostMapping("/editor/unit")
+    public String createUnit(@RequestParam String name,
+        @RequestParam String description,
+        Model model) {
+        unitService.createUnit(name, description);
+        model.addAttribute("units", unitService.findAllUnits());
+        return "unitEditorPage";
+    }
+
+
     @PostMapping("/editor/monster")
     public String createMonster(@RequestParam String monsterName,
         @RequestParam String description,
@@ -143,5 +160,6 @@ public class GameEditorController {
         model.addAttribute("monsterTypes", MonsterType.values());
         return "monsterEditorPage";
     }
+
 
 }

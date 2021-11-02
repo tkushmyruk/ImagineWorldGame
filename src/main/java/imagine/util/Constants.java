@@ -5,6 +5,6 @@ import java.util.List;
 
 public abstract class Constants {
     public static final List<String> optionsNames =
-        Arrays.asList("hero", "skill", "item", "monster");
+        Arrays.asList("hero", "skill", "item", "unit", "monster");
 
 }

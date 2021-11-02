@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="monster: ${monsters}">
+  <div>
+    <a href="/editor/edit/${monster.monsterName}" th:text="@{{monster} edit (monster = ${monster.monsterName})}"></a>
+  </div>
+</div>
+<form method="post">
+  <div>
+    <label>Monster name : <input type="text" name="monsterName"></label>
+  </div>
+  <div>
+    <label>Description : <input type="text" name="description"></label>
+  </div>
+  <div>
+    <label>Lvl : <input type="number" name="lvl"></label>
+  </div>
+  <div>
+    <label>Damage : <input type="number" name="damage"></label>
+  </div>
+  <div>
+    <label>Defense : <input type="number" name="defense"></label>
+  </div>
+  <div>
+    <label>Health Points : <input type="number" name="healthPoints"></label>
+  </div>
+  <div>
+    <label>Mana Points : <input type="number" name="manaPoints"></label>
+  </div>
+  <div>
+    <label>Experience : <input type="number" name="experience"></label>
+  </div>
+
+  <select name="monsterType">
+    <div th:each="monsterType: ${monsterTypes}">
+      <option  th:value="${monsterType}" th:text="${monsterType}"></option>
+    </div>
+  </select>
+  <button type="submit">Create</button>
+</form>
+</body>

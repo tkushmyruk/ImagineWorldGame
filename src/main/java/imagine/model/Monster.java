@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -43,4 +45,8 @@ public class Monster {
     private Bag bag;
     @OneToMany(mappedBy = "monster")
     private List<Skill> skills;
+    private boolean isDead;
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
+    private Quest quest;
 }

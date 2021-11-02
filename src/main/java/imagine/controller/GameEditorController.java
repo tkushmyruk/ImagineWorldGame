@@ -10,10 +10,12 @@ import imagine.model.DamageType;
 import imagine.model.ItemRarity;
 import imagine.model.ItemType;
 import imagine.model.MonsterType;
+import imagine.model.QuestType;
 import imagine.model.SkillType;
 import imagine.service.HeroService;
 import imagine.service.ItemService;
 import imagine.service.MonsterService;
+import imagine.service.QuestService;
 import imagine.service.SkillService;
 import imagine.service.UnitService;
 import imagine.util.Constants;
@@ -28,6 +30,7 @@ public class GameEditorController {
     private final ItemService itemService;
     private final UnitService unitService;
     private final MonsterService monsterService;
+    private final QuestService questService;
 
     @GetMapping("/editor")
     public String getListOfOptions(Model model) {
@@ -61,12 +64,20 @@ public class GameEditorController {
     public String getUnitEditorPage(Model model) {
         model.addAttribute("units", unitService.findAllUnits());
         return "unitEditorPage";
-      
+    }
+
     @GetMapping("/editor/monster")
-    public String getMonsterEditorPage(Model model){
+    public String getMonsterEditorPage(Model model) {
         model.addAttribute("monsters", monsterService.findAllMonsters());
         model.addAttribute("monsterTypes", MonsterType.values());
         return "monsterEditorPage";
+    }
+
+    @GetMapping("/editor/quest")
+    public String getQuestEditorPage(Model model){
+        model.addAttribute("quests", questService.findAllQuests());
+        model.addAttribute("questTypes", QuestType.values());
+        return "questEditorPage";
     }
 
     @PostMapping("/editor/hero")
@@ -142,7 +153,6 @@ public class GameEditorController {
         return "unitEditorPage";
     }
 
-
     @PostMapping("/editor/monster")
     public String createMonster(@RequestParam String monsterName,
         @RequestParam String description,
@@ -153,7 +163,7 @@ public class GameEditorController {
         @RequestParam int manaPoints,
         @RequestParam int experience,
         @RequestParam String monsterType,
-        Model model){
+        Model model) {
         monsterService.createMonster(monsterName, description, lvl, damage, defense, healthPoints,
             manaPoints, experience, monsterType);
         model.addAttribute("monsters", monsterService.findAllMonsters());
@@ -161,5 +171,15 @@ public class GameEditorController {
         return "monsterEditorPage";
     }
 
-
+    @PostMapping("/editor/quest")
+    public String createQuest(@RequestParam String questName,
+        @RequestParam String description,
+        @RequestParam int requiredLvl,
+        @RequestParam String  questType,
+        Model model){
+        questService.createQuest(questName, description, requiredLvl, questType);
+        model.addAttribute("quests", questService.findAllQuests());
+        model.addAttribute("questTypes", QuestType.values());
+        return "questEditorPage";
+    }
 }

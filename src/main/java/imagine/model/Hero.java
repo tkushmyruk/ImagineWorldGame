@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -42,6 +43,8 @@ public class Hero {
     private String description;
     @OneToMany(mappedBy = "hero")
     private List<Skill> skills;
+    @OneToMany(mappedBy = "hero")
+    private List<Quest> quests;
     private int strength;
     private int agility;
     private int intelligence;

@@ -27,5 +27,10 @@ public class Action {
     @ManyToOne
     @JoinColumn(name = "unit_id")
     private Unit unit;
+    private boolean isQuested;
+    private String actionName;
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
+    private Quest quest;
 
 }

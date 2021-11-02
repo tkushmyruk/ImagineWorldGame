@@ -11,7 +11,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Builder
 public class Bag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,6 +31,9 @@ public class Bag {
     @OneToOne
     @JoinColumn(name = "hero_id")
     private Hero hero;
+    @OneToOne
+    @JoinColumn(name = "quest_id")
+    private Quest quest;
     @OneToOne
     @JoinColumn(name = "monster_id")
     private Monster monster;

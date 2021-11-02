@@ -29,6 +29,8 @@ public class Item {
     private Long id;
     private String itemName;
     private String description;
+    private int count;
+    private int price;
     private int lvl;
     private int minHeroLvl;
     private int damage;
@@ -48,6 +50,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "bag_id")
     private Bag bag;
+    @ManyToOne
+    @JoinColumn(name = "quest_id")
+    private Quest quest;
 
 
 }

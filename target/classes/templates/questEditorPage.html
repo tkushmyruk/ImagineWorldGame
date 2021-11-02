@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<head th:include="fragments/header :: header"></head>
+<div th:each="quest: ${quests}">
+  <div>
+    <a href="/editor/edit/${quest.questName}" th:text="@{{quest} edit (quest = ${quest.questName})}"></a>
+  </div>
+</div>
+<form method="post">
+  <div>
+    <label>Quest Name : <input type="text" name="questName"></label>
+  </div>
+  <div>
+    <label>Description : <input type="text" name="description"></label>
+  </div>
+  <div>
+    <label>Required Lvl : <input type="text" name="requiredLvl"></label>
+  </div>
+  <select name="questType">
+    <div th:each="questType: ${questTypes}">
+      <option  th:value="${questType}" th:text="${questType}"></option>
+    </div>
+  </select>
+  <button type="submit">Create</button>
+</form>
+</body>
+</html>
